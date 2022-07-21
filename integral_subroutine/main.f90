@@ -22,8 +22,8 @@ subroutine integrate(f, xmin, xmax, integral)
   implicit none
 
   real*8, intent(in) :: xmin, xmax
-  real*8 :: h, x
   real*8, intent(out) :: integral
+  real*8 :: h, x
   integer :: i
   interface
      function f(x) result(y)

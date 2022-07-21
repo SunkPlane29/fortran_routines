@@ -1,16 +1,18 @@
 program array
   implicit none
 
-  ! this interface is needed in order to use allocatable argument
+  ! interface required for allocatable argument
   interface
      subroutine append_element(arr, element)
-       integer :: element
-       integer, allocatable :: arr(:)
+       integer, intent(in) :: element
+       integer, allocatable, intent(inout) :: arr(:)
      end subroutine append_element
   end interface
 
   integer, allocatable :: arr(:)
   integer :: i, n, fib
+
+  external array_subroutine
 
   n = 20
 
@@ -25,7 +27,8 @@ end program array
 integer function fib(n)
   implicit none
 
-  integer :: n, previous, current, i
+  integer, intent(in) :: n
+  integer :: previous, current, i
 
   if (n == 0) then
      fib = 0
@@ -48,8 +51,8 @@ end function fib
 subroutine append_element(arr, element)
   implicit none
 
-  integer :: element
-  integer, allocatable :: arr(:)
+  integer, intent(in) :: element
+  integer, allocatable, intent(inout) :: arr(:)
   integer, allocatable :: arr_cp(:)
   integer arr_size
 
