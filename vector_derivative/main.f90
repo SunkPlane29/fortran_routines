@@ -5,8 +5,13 @@ program main
   real*8 :: calculate_derivative, f, derivative, x
   integer :: n
 
+  x = 1.0d0
+  n = 45
+
   ! while this does indeed calculate the derivative, it is not precise and
   ! doesn't get more accurate the more values are added to the vector
+  derivative = calculate_derivative(f, x, n)
+  print *, derivative
 
 end program main
 
@@ -35,7 +40,7 @@ function calculate_derivative(f, x, n) result(derivative)
   integer, intent(in) :: n
   integer :: i
 
-  step = 1.0/2**20
+  step = 1.0e-3
   sum = 0.0
 
   function_values = [(f(x + (step * dfloat(i))), i = 1, n)]
